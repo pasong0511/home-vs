@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useMemo } from "react";
 
-const FooterNaviation = () => {
+const FooterNavigation = () => {
     const routes = useMemo(() => {
         return [
             {
@@ -41,4 +41,4 @@ const FooterNaviation = () => {
     );
 };
 
-export default FooterNaviation;
+export default FooterNavigation;
