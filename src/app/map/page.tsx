@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import MyMap from "./component/MyMap";
+import MapContainer from "./component/MapContainer";
 
 const page = async () => {
     return (
         <div>
             <h1>지도페이지</h1>
-            <MyMap />
+            <MapContainer />
         </div>
     );
 };
