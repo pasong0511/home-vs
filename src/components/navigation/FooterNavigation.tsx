@@ -29,14 +29,12 @@ const FooterNavigation = () => {
 
     return (
         <footer className="footer-nav">
-            {routes.map((route) => {
-                return (
-                    <Link key={route.label} href={route.href}>
-                        <span className="icon">{route.icon}</span>
-                        <span>{route.label}</span>
-                    </Link>
-                );
-            })}
+            {routes.map((route) => (
+                <Link key={route.label} href={route.href}>
+                    <span className="icon">{route.icon}</span>
+                    <span>{route.label}</span>
+                </Link>
+            ))}
         </footer>
     );
 };

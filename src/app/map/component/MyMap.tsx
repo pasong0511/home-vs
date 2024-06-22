@@ -1,19 +1,18 @@
 "use client";
+import { KAKAO_MAP_SCRIPT_URL } from "@/constants/kakaoMap";
+import useLoad from "@/hooks/useLoad";
 import Script from "next/script";
 import React, { useEffect, useState } from "react";
 import { Map } from "react-kakao-maps-sdk";
 
 function MyMap() {
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(false);
+
+    const loaded = useLoad(KAKAO_MAP_SCRIPT_URL);
 
     return (
         <div>
-            <Script
-                onLoad={() => kakao.maps.load(() => setShow(true))}
-                src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=0c44c195b0d549c627b026d2c12bca6c&autoload=false`}
-            ></Script>
-            맵로드
-            {show && (
+            {loaded && (
                 <Map
                     center={{ lat: 33.5563, lng: 126.79581 }} // 지도의 중심 좌표
                     style={{ width: "800px", height: "600px" }} // 지도 크기
