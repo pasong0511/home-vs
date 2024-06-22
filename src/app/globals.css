@@ -132,3 +132,31 @@ a {
     display: block;
     font-size: 24px;
 }
+
+/* 폴더 */
+.folder-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.folder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.folder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #000;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    min-width: 400px;
+}

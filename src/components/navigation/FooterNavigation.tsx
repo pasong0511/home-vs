@@ -16,8 +16,8 @@ const FooterNavigation = () => {
             },
             {
                 icon: "📂",
-                label: "미정",
-                href: "/explore",
+                label: "폴더",
+                href: "/folder",
             },
             {
                 icon: "👤",
