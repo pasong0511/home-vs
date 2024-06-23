@@ -24,3 +24,8 @@ https://developers.kakao.com/console/app/1095506
 https://apis.map.kakao.com/web/wizard/
 https://react-kakao-maps-sdk.jaeseokim.dev/docs/intro
 https://velog.io/@wlwl99/React-Kakao-Map-SDK-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+
+### 실행
+
+npm run json-server -- --port 4000
+npm run dev
