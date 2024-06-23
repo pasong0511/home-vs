@@ -2,6 +2,7 @@
 import React from "react";
 import Folder from "./components/Folder";
 import Header from "./components/Header";
+import Folders from "./components/Folders";
 
 // 데이터 페칭 함수
 async function fetchFolders() {
@@ -29,13 +30,7 @@ const FolderPage = async () => {
                 </div>
                 <div className="content-body">
                     <div className="folder-list">
-                        {folders.length > 0 ? (
-                            folders.map((item: any) => (
-                                <Folder key={item.id} item={item} />
-                            ))
-                        ) : (
-                            <p>No folders found.</p>
-                        )}
+                        <Folders folders={folders} />
                     </div>
                 </div>
             </div>

@@ -1,14 +1,20 @@
 {
-    "folders": [
-        {
-            "id": "1",
-            "folderName": "22동천",
-            "create": "2022011"
-        },
-        {
-            "id": "2",
-            "folderName": "23년구로디지털단지",
-            "create": "20240623"
-        }
-    ]
+  "folders": [
+    {
+      "folderName": "111",
+      "location": "111",
+      "memo": "111",
+      "option": {},
+      "create": "2024-06-23T17:00:24.552Z",
+      "id": "8da01656-5c2b-4e9f-bd14-aae4e975ce48"
+    },
+    {
+      "id": "5b3f5754-471f-488d-b0e0-b2a7d3035433",
+      "folderName": "22",
+      "location": "22",
+      "memo": "22",
+      "option": {},
+      "create": "2024-06-23T17:00:17.871Z"
+    }
+  ]
 }

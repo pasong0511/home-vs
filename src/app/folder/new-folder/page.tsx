@@ -1,10 +1,10 @@
 import React from "react";
-import NewForm from "../components/NewForm";
+import FolderForm from "../components/FolderForm";
 
 function NewFolderPage() {
     return (
         <div>
-            <NewForm />
+            <FolderForm />
         </div>
     );
 }

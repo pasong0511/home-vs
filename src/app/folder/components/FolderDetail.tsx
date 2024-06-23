@@ -1,8 +1,9 @@
+//src/app/folder/components/FolderDetail.tsx
 "use client";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, FormEvent, useState } from "react";
 
-function NewForm() {
+const FolderDetail = ({ id }: { id: string }) => {
     const [formData, setFormData] = useState({
         folderName: "",
         location: "",
@@ -10,6 +11,23 @@ function NewForm() {
         option: {},
     });
     const router = useRouter();
+
+    useEffect(() => {
+        const fetchFolder = async () => {
+            const response = await fetch(`/api/folder/${id}`);
+            if (response.ok) {
+                const data = await response.json();
+                setFormData({
+                    folderName: data.folderName || "",
+                    location: data.location || "",
+                    memo: data.memo || "",
+                    option: data.option || {},
+                });
+            }
+        };
+
+        fetchFolder();
+    }, [id]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -23,8 +41,8 @@ function NewForm() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const response = await fetch("/api/folder", {
-            method: "POST",
+        const response = await fetch(`/api/folder/${id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -32,20 +50,18 @@ function NewForm() {
         });
 
         if (response.ok) {
-            // 폴더 생성 후 페이지 전환과 새로고침
             router.push("/folder");
             router.refresh();
         } else {
-            // 에러 처리 추가 필요함
-            console.log("Failed to add folder", formData);
+            console.log("Failed to update folder", formData);
         }
     };
 
     return (
         <div>
-            <h1>새 폴더 만들기</h1>
+            <h1>폴더 수정</h1>
             <form onSubmit={handleSubmit}>
-                <button type="submit">생성</button>
+                <button type="submit">수정</button>
                 <div>
                     <span>폴더이름</span>
                     <input
@@ -76,6 +92,6 @@ function NewForm() {
             </form>
         </div>
     );
-}
+};
 
-export default NewForm;
+export default FolderDetail;
