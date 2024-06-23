@@ -1,5 +1,5 @@
 interface IFolder {
     id: string;
-    title: string;
+    folderName: string;
     create: string;
 }

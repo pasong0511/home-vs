@@ -32,12 +32,12 @@ function NewForm() {
         });
 
         if (response.ok) {
-            //폴더 생성 후 페이지 이동
+            // 폴더 생성 후 페이지 전환과 새로고침
             router.push("/folder");
+            router.refresh();
         } else {
-            //에러 처리 추가 필요함
-            router.push("/folder");
-            console.log(formData);
+            // 에러 처리 추가 필요함
+            console.log("Failed to add folder", formData);
         }
     };
 
@@ -45,36 +45,34 @@ function NewForm() {
         <div>
             <h1>새 폴더 만들기</h1>
             <form onSubmit={handleSubmit}>
-                <label>
-                    폴더 이름:
+                <button type="submit">생성</button>
+                <div>
+                    <span>폴더이름</span>
                     <input
                         type="text"
                         name="folderName"
                         value={formData.folderName}
                         onChange={handleChange}
                     />
-                </label>
-                <label>
-                    지역:
+                </div>
+                <div>
+                    <span>지역</span>
                     <input
                         type="text"
                         name="location"
                         value={formData.location}
                         onChange={handleChange}
                     />
-                </label>
-                <label>
-                    메모:
+                </div>
+                <div>
+                    <span>메모</span>
                     <input
                         type="text"
                         name="memo"
                         value={formData.memo}
                         onChange={handleChange}
                     />
-                </label>
-
-                {/* 나머지 필드 추가 */}
-                <button type="submit">생성</button>
+                </div>
             </form>
         </div>
     );
