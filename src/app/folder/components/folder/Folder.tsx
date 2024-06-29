@@ -23,16 +23,15 @@ function Folder({ item }: { item: IFolder }) {
     };
 
     return (
-        <article
-            key={item.id}
-            className="folder-item"
-            onClick={handleClickFolder}
-        >
-            <div className="folder-icon">📁</div>
-            <div className="folder-details">
-                <div className="folder-name">{item.folderName}</div>
-                <span className="folder-status">비어있음</span>
+        <article key={item.id} className="folder-item">
+            <div className="folder-content" onClick={handleClickFolder}>
+                <div className="folder-icon">📁</div>
+                <div className="folder-details">
+                    <div className="folder-name">{item.folderName}</div>
+                    <span className="folder-status">비어있음</span>
+                </div>
             </div>
+
             <div className="folder-options" onClick={handleClickFolderModify}>
                 <BsThreeDots />
             </div>
