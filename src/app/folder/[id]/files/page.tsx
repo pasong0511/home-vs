@@ -11,10 +11,7 @@ function FilesPage({ params }: any) {
     return (
         <div>
             {/* 파일 생성 버튼 */}
-            <Header
-                title={"폴더"}
-                routeUrl={`/folder/new-folder/${id}/new-file`}
-            />
+            <Header title={"폴더"} routeUrl={`/folder/${id}/new-file`} />
 
             {/* 파일 목록 */}
             <FilesList folderId={id} />
