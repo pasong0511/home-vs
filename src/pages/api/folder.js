@@ -1,9 +1,5 @@
+// src/pages/api/folder.js
 import { v4 as uuidv4 } from "uuid";
-
-let folders = [
-    { id: uuidv4(), folderName: "22동천", create: "2022011" },
-    { id: uuidv4(), folderName: "23년구로디지털단지", create: "20240623" },
-];
 
 export default async function handler(req, res) {
     if (req.method === "GET") {
@@ -20,15 +16,13 @@ export default async function handler(req, res) {
             const { folderName, location, memo, option } = req.body;
             const newFolder = {
                 id: uuidv4(),
-                folderName: folderName,
+                folderName,
                 location,
                 memo,
                 option,
                 create: new Date().toISOString(),
             };
-            folders.push(newFolder);
 
-            // JSON Server에 데이터 추가
             const response = await fetch("http://localhost:4000/folders", {
                 method: "POST",
                 headers: {
