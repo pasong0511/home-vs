@@ -26,7 +26,7 @@ const FolderPage = async () => {
         return (
             <div>
                 <div className="content-header">
-                    <Header />
+                    <Header title={"파일"} routeUrl={"/folder/new-folder"} />
                 </div>
                 <div className="content-body">
                     <Folders folders={folders} />

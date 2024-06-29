@@ -3,17 +3,21 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
-function Header() {
+interface HeaderProps {
+    title?: string;
+    routeUrl: string;
+}
+
+function Header({ title, routeUrl }: HeaderProps) {
     const router = useRouter();
 
     const onClickCreate = () => {
-        //폴더 생성 페이지 이동
-        router.push("/folder/new-folder");
+        router.push(routeUrl);
     };
 
     return (
         <div className="header-container">
-            <span className="content-title">폴더</span>
+            <span className="content-title">{title}</span>
             <span onClick={onClickCreate} className="add-icon">
                 <BsFillPlusCircleFill size={34} />
             </span>
