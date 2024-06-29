@@ -133,30 +133,55 @@ a {
     font-size: 24px;
 }
 
+/**헤더*/
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
 /* 폴더 */
 .folder-list {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 10px;
+    padding: 10px;
 }
 
 .folder-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
 
 .folder-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border: 2px solid #000;
-    border-radius: 4px;
     padding: 10px;
-    margin-bottom: 10px;
-    min-width: 400px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    justify-content: space-between; /* Added this line */
+}
+
+.folder-icon {
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.folder-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.folder-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.folder-status {
+    color: #777;
 }

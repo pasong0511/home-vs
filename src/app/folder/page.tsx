@@ -1,6 +1,6 @@
 // src/app/folder/page.tsx
 import React from "react";
-import Folder from "./components/Folder";
+
 import Header from "./components/Header";
 import Folders from "./components/Folders";
 
@@ -29,9 +29,7 @@ const FolderPage = async () => {
                     <Header />
                 </div>
                 <div className="content-body">
-                    <div className="folder-list">
-                        <Folders folders={folders} />
-                    </div>
+                    <Folders folders={folders} />
                 </div>
             </div>
         );

@@ -12,9 +12,9 @@ function Header() {
     };
 
     return (
-        <div>
+        <div className="header-container">
             <span className="content-title">폴더</span>
-            <span onClick={onClickCreate}>
+            <span onClick={onClickCreate} className="add-icon">
                 <BsFillPlusCircleFill size={34} />
             </span>
         </div>
