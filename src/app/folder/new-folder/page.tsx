@@ -1,5 +1,5 @@
 import React from "react";
-import FolderForm from "../components/FolderForm";
+import FolderForm from "../components/folder/FolderForm";
 
 function NewFolderPage() {
     return (

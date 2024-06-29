@@ -2,7 +2,7 @@
 import React from "react";
 
 import Header from "./components/Header";
-import Folders from "./components/Folders";
+import Folders from "./components/folder/Folders";
 
 // 데이터 페칭 함수
 async function fetchFolders() {

@@ -1,6 +1,6 @@
 //src/app/folder/[id]/files/page.tsx
 import React from "react";
-import FilesList from "../../components/FilesList";
+import FilesList from "../../components/file/FilesList";
 import Header from "../../components/Header";
 
 function FilesPage({ params }: any) {
