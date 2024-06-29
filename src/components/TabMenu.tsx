@@ -1,30 +1,34 @@
 "use client";
 import React, { useState } from "react";
 
-interface ButtonGroupProps {
-    buttonList: Button[];
+interface TabMenuProps {
+    tabList: Tab[];
 }
 
-interface Button {
+interface Tab {
     order: number;
     value: string;
     label: string;
 }
 
-function ButtonGroup({ buttonList }: ButtonGroupProps) {
-    const sortList = buttonList.sort((a, b) => a.order - b.order);
-    const [activeButton, setActiveButton] = useState<string | null>(null);
+function TabMenu({ tabList }: TabMenuProps) {
+    const sortList = tabList.sort((a, b) => a.order - b.order);
+
+    //배열의 맨 앞에 있는 것이 기본 값
+    const [activeButton, setActiveButton] = useState<string | null>(
+        tabList[0].value
+    );
 
     const handleClick = (value: string) => {
         setActiveButton(value === activeButton ? null : value);
     };
 
     return (
-        <div className="button-group">
+        <div className="tab-menu">
             {sortList.map((item) => (
                 <button
                     key={item.value}
-                    className={`type-button ${
+                    className={`tab-button ${
                         item.value === activeButton ? "active" : ""
                     }`}
                     onClick={() => handleClick(item.value)}
@@ -36,4 +40,4 @@ function ButtonGroup({ buttonList }: ButtonGroupProps) {
     );
 }
 
-export default ButtonGroup;
+export default TabMenu;

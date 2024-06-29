@@ -1,4 +1,5 @@
 import ButtonGroup from "@/components/ButtonGroup";
+import TabMenu from "@/components/TabMenu";
 import React from "react";
 
 const buttonValue = [
@@ -6,6 +7,16 @@ const buttonValue = [
     { order: 2, value: "오피스텔", label: "오피스텔" },
     { order: 3, value: "빌라", label: "빌라" },
     { order: 4, value: "상가", label: "상가" },
+];
+
+const tabValue = [
+    { order: 1, value: "시세", label: "시세" },
+    { order: 2, value: "기본", label: "기본" },
+    { order: 3, value: "상세", label: "상세" },
+    { order: 4, value: "학군", label: "학군" },
+    { order: 5, value: "교통", label: "교통" },
+    { order: 6, value: "환경", label: "환경" },
+    { order: 7, value: "사진", label: "사진" },
 ];
 
 function NewFilePage() {
@@ -31,15 +42,8 @@ function NewFilePage() {
                         <label>종류 (필수)</label>
                         <ButtonGroup buttonList={buttonValue} />
                     </div>
-                    <div className="tab-menu">
-                        <button className="tab-button">시세</button>
-                        <button className="tab-button">기본</button>
-                        <button className="tab-button active">상세</button>
-                        <button className="tab-button">학군</button>
-                        <button className="tab-button">교통</button>
-                        <button className="tab-button">환경</button>
-                        <button className="tab-button">사진</button>
-                    </div>
+
+                    <TabMenu tabList={tabValue} />
                 </main>
             </div>
         </div>
