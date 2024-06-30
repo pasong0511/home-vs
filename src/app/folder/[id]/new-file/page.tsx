@@ -1,5 +1,5 @@
-import React from "react";
-
+"use client";
+import React, { useState } from "react";
 import TabContent from "@/components/TabContent";
 import ButtonGroupUI from "@/components/ui/ButtonGroupUI";
 
@@ -24,7 +24,7 @@ const viewData = [
     {
         viewType: "input",
         display: true,
-
+        tab: "기본",
         data: "인풋1",
         config: {
             label: "인풋1",
@@ -35,7 +35,7 @@ const viewData = [
     {
         viewType: "input",
         display: true,
-
+        tab: "기본",
         data: "인풋2",
         config: {
             label: "인풋2",
@@ -46,7 +46,7 @@ const viewData = [
     {
         viewType: "text_area",
         display: true,
-
+        tab: "기본",
         data: "텍스트에리어",
         config: {
             label: "텍스트에리어",
@@ -57,6 +57,7 @@ const viewData = [
     {
         viewType: "button_group",
         display: true,
+        tab: "기본",
         data: "버튼그룹",
         config: {
             className: "",
@@ -68,9 +69,28 @@ const viewData = [
             ],
         },
     },
+    {
+        viewType: "text_area",
+        display: true,
+        tab: "상세",
+        data: "상세정보",
+        config: {
+            label: "상세 정보",
+            placeholder: "상세 정보를 입력하세요.",
+            className: "",
+        },
+    },
 ];
 
 function NewFilePage() {
+    const [currentViewData, setCurrentViewData] = useState(
+        viewData.filter((data) => data.tab === "기본")
+    );
+
+    const handleTabChange = (activeTab: string) => {
+        setCurrentViewData(viewData.filter((data) => data.tab === activeTab));
+    };
+
     return (
         <div>
             <div>파일만들기</div>
@@ -94,8 +114,11 @@ function NewFilePage() {
                         <ButtonGroupUI buttonList={buttonValue} />
                     </div>
 
-                    {/* <TabMenu tabList={tabValue} /> */}
-                    <TabContent tabList={tabValue} viewData={viewData} />
+                    <TabContent
+                        tabList={tabValue}
+                        viewData={currentViewData}
+                        onTabChange={handleTabChange}
+                    />
                 </main>
             </div>
         </div>

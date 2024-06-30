@@ -1,14 +1,14 @@
 "use client";
 import React, { useState } from "react";
-
-import TabMenu from "./TabMenu";
+import TabMenuUI from "./ui/TabMenuUI";
 import { ContentComponent } from "./ContentComponent";
 
 import { ViewComponent } from "@/types/types";
 
-interface TabMenuProps {
+interface TabMenuUIProps {
     tabList: Tab[];
     viewData: ViewComponent[];
+    onTabChange: (value: string) => void;
 }
 
 interface Tab {
@@ -17,35 +17,24 @@ interface Tab {
     label: string;
 }
 
-function TabContent({ tabList, viewData }: TabMenuProps) {
-    //배열의 맨 앞에 있는 것이 기본 값
+function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
     const [activeTab, setActiveTab] = useState<string | null>(tabList[0].value);
 
     const handleTabClick = (value: string) => {
         setActiveTab(value);
-    };
-
-    //사실 여기서 컴포넌트마다 다를 이유는 없다
-    const renderContent = () => {
-        switch (activeTab) {
-            case "기본":
-                return <ContentComponent viewData={viewData} />;
-
-            case "상세":
-                return <div>Details Content</div>;
-            default:
-                return null;
-        }
+        onTabChange(value);
     };
 
     return (
         <div>
-            <TabMenu
+            <TabMenuUI
                 tabList={tabList}
                 activeTab={activeTab}
                 onTabClick={handleTabClick}
             />
-            <div className="tab-content">{renderContent()}</div>
+            <div className="tab-content">
+                <ContentComponent viewData={viewData} />
+            </div>
         </div>
     );
 }

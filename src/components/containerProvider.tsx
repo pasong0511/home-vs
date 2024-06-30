@@ -1,7 +1,8 @@
-import ButtonGroupUI from "./ui/ButtonGroupUI";
+import React from "react";
+
+import ButtonGroupContainer from "./container/ButtonGroupContainer";
 import InputContainer from "./container/InputContainer";
 import TextAreaContainer from "./container/TextAreaContainer";
-import ButtonGroupContainer from "./container/ButtonGroupContainer";
 import { ViewComponent } from "@/types/types";
 
 export const containerProvider = (props: ViewComponent) => {
