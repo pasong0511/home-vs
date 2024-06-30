@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 interface TabMenuProps {
     tabList: Tab[];
+    activeTab: string | null;
+    onTabClick: (value: string) => void;
 }
 
 interface Tab {
@@ -11,17 +13,8 @@ interface Tab {
     label: string;
 }
 
-function TabMenu({ tabList }: TabMenuProps) {
+function TabMenu({ tabList, activeTab, onTabClick }: TabMenuProps) {
     const sortList = tabList.sort((a, b) => a.order - b.order);
-
-    //배열의 맨 앞에 있는 것이 기본 값
-    const [activeButton, setActiveButton] = useState<string | null>(
-        tabList[0].value
-    );
-
-    const handleClick = (value: string) => {
-        setActiveButton(value === activeButton ? null : value);
-    };
 
     return (
         <div className="tab-menu">
@@ -29,9 +22,9 @@ function TabMenu({ tabList }: TabMenuProps) {
                 <button
                     key={item.value}
                     className={`tab-button ${
-                        item.value === activeButton ? "active" : ""
+                        item.value === activeTab ? "active" : ""
                     }`}
-                    onClick={() => handleClick(item.value)}
+                    onClick={() => onTabClick(item.value)}
                 >
                     {item.label}
                 </button>
