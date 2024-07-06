@@ -20,7 +20,7 @@ interface Tab {
 }
 
 function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
-    const [activeTab, setActiveTab] = useState<string | null>(tabList[0].value);
+    const [activeTab, setActiveTab] = useState<string | null>("사진");
 
     const handleTabClick = (value: string) => {
         setActiveTab(value);
