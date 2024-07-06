@@ -17,9 +17,16 @@ function InputContainer(props: any) {
         return null;
     }
 
-    const { label, placeholder } = props.config;
+    const { id, label, placeholder, subPlaceholder } = props.config;
 
-    return <InputUI label={label} placeholder={placeholder} />;
+    return (
+        <InputUI
+            id={id}
+            label={label}
+            placeholder={placeholder}
+            subPlaceholder={subPlaceholder}
+        />
+    );
 }
 
 export default InputContainer;

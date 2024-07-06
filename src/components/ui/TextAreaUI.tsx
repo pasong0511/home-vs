@@ -6,7 +6,7 @@ interface TextAreaViewProps {
 function TextAreaUI({ label, placeholder }: TextAreaViewProps) {
     return (
         <div>
-            <label>{label}</label>
+            <label className="item-label">{label}</label>
             <textarea placeholder={placeholder} />
         </div>
     );

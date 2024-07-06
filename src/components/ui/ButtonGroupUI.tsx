@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 
 interface ButtonGroupProps {
+    label?: string;
     buttonList: Button[];
 }
 
@@ -11,7 +12,7 @@ interface Button {
     label: string;
 }
 
-function ButtonGroupUI({ buttonList }: ButtonGroupProps) {
+function ButtonGroupUI({ label, buttonList }: ButtonGroupProps) {
     const sortList = buttonList.sort((a, b) => a.order - b.order);
     const [activeButton, setActiveButton] = useState<string | null>(null);
 
@@ -20,19 +21,22 @@ function ButtonGroupUI({ buttonList }: ButtonGroupProps) {
     };
 
     return (
-        <div className="button-group">
-            {sortList.map((item) => (
-                <button
-                    key={item.value}
-                    className={`type-button ${
-                        item.value === activeButton ? "active" : ""
-                    }`}
-                    onClick={() => handleClick(item.value)}
-                >
-                    {item.label}
-                </button>
-            ))}
-        </div>
+        <>
+            <label className="item-label">{label}</label>
+            <div className="button-group">
+                {sortList.map((item) => (
+                    <button
+                        key={item.value}
+                        className={`type-button ${
+                            item.value === activeButton ? "active" : ""
+                        }`}
+                        onClick={() => handleClick(item.value)}
+                    >
+                        {item.label}
+                    </button>
+                ))}
+            </div>
+        </>
     );
 }
 

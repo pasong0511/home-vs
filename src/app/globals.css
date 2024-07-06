@@ -193,9 +193,9 @@ a {
 
 /* 인풋 */
 .input-group {
-    padding: 20px;
+    /* padding: 10px; */
     background-color: #fff;
-    border-bottom: 1px solid #eee;
+    /* border-bottom: 1px solid #eee; */
 }
 
 .input-group label {
@@ -210,6 +210,12 @@ a {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.item-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .button-group {
