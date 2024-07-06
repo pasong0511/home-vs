@@ -4,6 +4,7 @@ import ButtonGroupContainer from "./container/ButtonGroupContainer";
 import InputContainer from "./container/InputContainer";
 import TextAreaContainer from "./container/TextAreaContainer";
 import { ViewComponent } from "@/types/types";
+import CombinedInputContainer from "./container/CombinedInputContainer";
 
 export const itemProvider = (props: ViewComponent) => {
     const { viewType } = props;
@@ -16,6 +17,8 @@ export const itemProvider = (props: ViewComponent) => {
             return <TextAreaContainer {...props} />;
         case "button_group":
             return <ButtonGroupContainer {...props} />;
+        case "combined_input":
+            return <CombinedInputContainer {...props} />;
         default:
             return <div>존재하지 않는 viewType 입니다.</div>;
     }

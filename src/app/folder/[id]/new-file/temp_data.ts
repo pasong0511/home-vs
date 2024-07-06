@@ -132,4 +132,55 @@ export const viewData = [
             ],
         },
     },
+    {
+        itemId: "현관구조",
+        viewType: "button_group",
+        display: true,
+        parentTab: "기본",
+        data: null,
+        config: {
+            label: "현관구조",
+            className: "",
+            buttonList: [
+                { order: 1, value: "복도식", label: "복도식" },
+                { order: 2, value: "계단식", label: "계단식" },
+                { order: 3, value: "복합식", label: "복합식" },
+            ],
+        },
+    },
+    {
+        itemId: "현관구조",
+        viewType: "combined_input",
+        display: true,
+        parentTab: "기본", //상속 대상
+        data: null,
+        config: {
+            //label: "현관구조",
+            className: "",
+            combined: [
+                {
+                    itemId: "최저층",
+                    viewType: "input",
+                    display: true,
+                    data: null,
+                    config: {
+                        label: "최저층",
+                        placeholder: "최저층",
+                        subPlaceholder: "층",
+                    },
+                },
+                {
+                    itemId: "최고층",
+                    viewType: "input",
+                    display: true,
+                    data: null,
+                    config: {
+                        label: "최고층",
+                        placeholder: "최고층",
+                        subPlaceholder: "층",
+                    },
+                },
+            ],
+        },
+    },
 ];

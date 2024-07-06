@@ -222,6 +222,27 @@ a {
     pointer-events: none;
 }
 
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 컴바인 인풋 */
+.input-group-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-group-wrapper .input-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-group-wrapper .input-group:last-child {
+    margin-right: 0;
+}
+
 .item-label {
     display: block;
     margin-bottom: 10px;
