@@ -11,13 +11,13 @@ const buttonValue = [
 ];
 
 const tabValue = [
-    { order: 3, value: "시세", label: "시세" },
-    { order: 1, value: "기본", label: "기본" },
-    { order: 2, value: "상세", label: "상세" },
-    { order: 4, value: "학군", label: "학군" },
-    { order: 5, value: "교통", label: "교통" },
-    { order: 6, value: "환경", label: "환경" },
-    { order: 7, value: "사진", label: "사진" },
+    { order: 3, value: "시세", label: "시세", sectionType: "panel" },
+    { order: 1, value: "기본", label: "기본", sectionType: "panel" },
+    { order: 2, value: "상세", label: "상세", sectionType: "panel" },
+    { order: 4, value: "학군", label: "학군", sectionType: "panel" },
+    { order: 5, value: "교통", label: "교통", sectionType: "panel" },
+    { order: 6, value: "환경", label: "환경", sectionType: "panel" },
+    { order: 7, value: "사진", label: "사진", sectionType: "picture" },
 ];
 
 const viewData = [

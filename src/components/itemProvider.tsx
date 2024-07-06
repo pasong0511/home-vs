@@ -5,7 +5,7 @@ import InputContainer from "./container/InputContainer";
 import TextAreaContainer from "./container/TextAreaContainer";
 import { ViewComponent } from "@/types/types";
 
-export const containerProvider = (props: ViewComponent) => {
+export const itemProvider = (props: ViewComponent) => {
     const { viewType } = props;
 
     switch (viewType) {

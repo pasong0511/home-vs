@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import TabMenuUI from "./ui/TabMenuUI";
-import { ContentComponent } from "./ContentComponent";
+import { PanelContent } from "./PanelContent";
 
 import { ViewComponent } from "@/types/types";
+import PictureContent from "./PictureContent";
 
 interface TabMenuUIProps {
     tabList: Tab[];
@@ -15,6 +16,7 @@ interface Tab {
     order: number;
     value: string;
     label: string;
+    sectionType: string;
 }
 
 function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
@@ -25,6 +27,19 @@ function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
         onTabChange(value);
     };
 
+    const renderSection = () => {
+        const sectionType = tabList.find(
+            (tab) => tab.value === activeTab
+        )?.sectionType;
+
+        switch (sectionType) {
+            case "panel":
+                return <PanelContent viewData={viewData} />;
+            case "picture":
+                return <PictureContent />;
+        }
+    };
+
     return (
         <div>
             <TabMenuUI
@@ -32,9 +47,7 @@ function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
                 activeTab={activeTab}
                 onTabClick={handleTabClick}
             />
-            <div className="tab-content">
-                <ContentComponent viewData={viewData} />
-            </div>
+            <div className="tab-content">{renderSection()}</div>
         </div>
     );
 }
