@@ -193,9 +193,7 @@ a {
 
 /* 인풋 */
 .input-group {
-    /* padding: 10px; */
     background-color: #fff;
-    /* border-bottom: 1px solid #eee; */
 }
 
 .input-group label {
@@ -204,12 +202,24 @@ a {
     font-weight: bold;
 }
 
-.input-group input {
-    width: calc(100% - 60px);
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper input {
+    width: calc(100% - 40px); /* 단위 공간을 위해 조정 */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.input-wrapper .unit {
+    position: absolute;
+    top: 40%;
+    right: 50px;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .item-label {

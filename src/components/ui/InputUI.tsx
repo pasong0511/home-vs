@@ -5,13 +5,18 @@ interface InputViewProps {
     subPlaceholder?: string;
 }
 
-function InputUI({ id, label, placeholder }: InputViewProps) {
+function InputUI({ id, label, placeholder, subPlaceholder }: InputViewProps) {
     return (
         <div className="input-group">
             <label className="item-label" htmlFor={id}>
                 {label}
             </label>
-            <input id={id} type="text" placeholder={placeholder} />
+            <div className="input-wrapper">
+                <input id={id} type="text" placeholder={placeholder} />
+                {subPlaceholder && (
+                    <span className="unit">{subPlaceholder}</span>
+                )}
+            </div>
         </div>
     );
 }
