@@ -1,7 +1,12 @@
 import React from "react";
+import DragAndDropUI from "./ui/DragAndDropUI";
 
 function PictureContent() {
-    return <div>사진</div>;
+    return (
+        <div>
+            <DragAndDropUI />
+        </div>
+    );
 }
 
 export default PictureContent;
