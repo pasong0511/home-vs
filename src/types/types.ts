@@ -12,6 +12,7 @@ export interface ViewComponent {
     config: {
         label?: string;
         placeholder?: string;
+        subPlaceholder?: string;
         className?: string;
         buttonList?: Button[];
     };

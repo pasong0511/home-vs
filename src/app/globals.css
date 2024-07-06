@@ -251,13 +251,13 @@ a {
 }
 
 /* 탭 */
-.tab-menu {
+.parentTab-menu {
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
 }
 
-.tab-button {
+.parentTab-button {
     background: none;
     border: none;
     font-size: 16px;
@@ -265,7 +265,7 @@ a {
     padding: 10px 20px;
 }
 
-.tab-button.active {
+.parentTab-button.active {
     border-bottom: 2px solid #000;
     font-weight: bold;
 }

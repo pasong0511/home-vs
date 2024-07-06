@@ -17,7 +17,12 @@ function ButtonGroupContainer(props: any) {
         return null;
     }
 
-    return <ButtonGroupUI buttonList={props.config.buttonList} />;
+    return (
+        <div>
+            <label>{props.config.label}</label>
+            <ButtonGroupUI buttonList={props.config.buttonList} />
+        </div>
+    );
 }
 
 export default ButtonGroupContainer;

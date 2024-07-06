@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import TabContent from "@/components/TabContent";
 import ButtonGroupUI from "@/components/ui/ButtonGroupUI";
+import { viewData } from "./temp_data";
 
 const buttonValue = [
     { order: 1, value: "아파트", label: "아파트" },
@@ -20,75 +21,15 @@ const tabValue = [
     { order: 7, value: "사진", label: "사진", sectionType: "picture" },
 ];
 
-const viewData = [
-    {
-        viewType: "input",
-        display: true,
-        tab: "기본",
-        data: "인풋1",
-        config: {
-            label: "인풋1",
-            placeholder: "인풋1",
-            className: "",
-        },
-    },
-    {
-        viewType: "input",
-        display: true,
-        tab: "기본",
-        data: "인풋2",
-        config: {
-            label: "인풋2",
-            placeholder: "인풋2",
-            className: "",
-        },
-    },
-    {
-        viewType: "text_area",
-        display: true,
-        tab: "기본",
-        data: "텍스트에리어",
-        config: {
-            label: "텍스트에리어",
-            placeholder: "텍스트에리어",
-            className: "",
-        },
-    },
-    {
-        viewType: "button_group",
-        display: true,
-        tab: "기본",
-        data: "버튼그룹",
-        config: {
-            className: "",
-            buttonList: [
-                { order: 1, value: "아파트", label: "아파트" },
-                { order: 2, value: "오피스텔", label: "오피스텔" },
-                { order: 3, value: "빌라", label: "빌라" },
-                { order: 4, value: "상가", label: "상가" },
-            ],
-        },
-    },
-    {
-        viewType: "text_area",
-        display: true,
-        tab: "상세",
-        data: "상세정보",
-        config: {
-            label: "상세 정보",
-            placeholder: "상세 정보를 입력하세요.",
-            className: "",
-        },
-    },
-];
-
 function NewFilePage() {
     const [currentViewData, setCurrentViewData] = useState(
-        viewData.filter((data) => data.tab === "기본")
+        viewData.filter((data) => data.parentTab === "기본")
     );
 
     const handleTabChange = (activeTab: string) => {
-        setCurrentViewData(viewData.filter((data) => data.tab === activeTab));
+        setCurrentViewData(
+            viewData.filter((data) => data.parentTab === activeTab)
+        );
     };
 
     return (

@@ -29,7 +29,7 @@ function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
 
     const renderSection = () => {
         const sectionType = tabList.find(
-            (tab) => tab.value === activeTab
+            (parentTab) => parentTab.value === activeTab
         )?.sectionType;
 
         switch (sectionType) {
@@ -47,7 +47,7 @@ function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
                 activeTab={activeTab}
                 onTabClick={handleTabClick}
             />
-            <div className="tab-content">{renderSection()}</div>
+            <div className="parentTab-content">{renderSection()}</div>
         </div>
     );
 }

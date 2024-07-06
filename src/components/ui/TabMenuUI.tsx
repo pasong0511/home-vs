@@ -17,11 +17,11 @@ function TabMenuUI({ tabList, activeTab, onTabClick }: TabMenuUIProps) {
     const sortList = tabList.sort((a, b) => a.order - b.order);
 
     return (
-        <div className="tab-menu">
+        <div className="parentTab-menu">
             {sortList.map((item) => (
                 <button
                     key={item.value}
-                    className={`tab-button ${
+                    className={`parentTab-button ${
                         item.value === activeTab ? "active" : ""
                     }`}
                     onClick={() => onTabClick(item.value)}
