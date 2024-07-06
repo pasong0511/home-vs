@@ -1,8 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import TabContent from "@/components/TabContent";
-import ButtonGroupUI from "@/components/ui/ButtonGroupUI";
+
 import { viewData } from "./temp_data";
+
+import ButtonGroupUI from "@/components/ui/ButtonGroupUI";
+import InputUI from "@/components/ui/InputUI";
 
 const buttonValue = [
     { order: 1, value: "아파트", label: "아파트" },
@@ -42,19 +45,15 @@ function NewFilePage() {
                     </div>
                 </header>
                 <main>
-                    <div className="input-group">
-                        <label htmlFor="name">이름 (필수)</label>
-                        <input
-                            type="text"
-                            id="name"
-                            placeholder="이름을 입력해 주세요."
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>종류 (필수)</label>
-                        <ButtonGroupUI buttonList={buttonValue} />
-                    </div>
-
+                    <InputUI
+                        id={"building_type"}
+                        label={"이름 (필수)"}
+                        placeholder="이름을 입력해 주세요."
+                    />
+                    <ButtonGroupUI
+                        label={"종류 (필수)"}
+                        buttonList={buttonValue}
+                    />
                     <TabContent
                         tabList={tabValue}
                         viewData={currentViewData}
