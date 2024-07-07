@@ -4,8 +4,8 @@ import TabContent from "@/components/TabContent";
 
 import { viewData } from "./temp_data";
 
-import ButtonGroupUI from "@/components/ui/ButtonGroupUI";
-import Input from "@/components/ui/InputUI";
+import ButtonGroup from "@/components/ui/ButtonGroup";
+import Input from "@/components/ui/Input";
 import withStringState from "@/hoc/withStringState";
 import withConsole from "@/hoc/withConsole";
 
@@ -56,7 +56,7 @@ function NewFilePage() {
                         placeholder="이름을 입력해 주세요."
                     />
 
-                    <ButtonGroupUI
+                    <ButtonGroup
                         label={"종류 (필수)"}
                         buttonList={buttonValue}
                     />

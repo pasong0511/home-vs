@@ -2,11 +2,13 @@ import React from "react";
 
 import { ViewComponent } from "@/types/types";
 
-import Input from "./ui/InputUI";
-import TextArea from "./ui/TextAreaUI";
-import ButtonGroup from "./ui/ButtonGroupUI";
 import withConfigToProps from "@/hoc/withConfigToProps";
+
 import CombinedContainer from "./CombinedContainer";
+
+import ButtonGroup from "./ui/ButtonGroup";
+import TextArea from "./ui/TextArea";
+import Input from "./ui/Input";
 
 const CONTAINER = {
     input: withConfigToProps(Input),

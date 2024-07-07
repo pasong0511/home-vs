@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 
-function DragAndDropUI() {
+function DragAndDrop() {
     const dragItem = useRef<number | null>(null); // 드래그할 아이템의 인덱스
     const dragOverItem = useRef<number | null>(null); // 드랍할 위치의 아이템의 인덱스
     const [list, setList] = useState([
@@ -41,7 +41,7 @@ function DragAndDropUI() {
 
     return (
         <div>
-            DragAndDropUI
+            DragAndDrop
             <div>
                 {list &&
                     list.map((item, index) => (
@@ -67,4 +67,4 @@ function DragAndDropUI() {
     );
 }
 
-export default DragAndDropUI;
+export default DragAndDrop;

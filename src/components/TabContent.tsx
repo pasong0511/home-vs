@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import TabMenuUI from "./ui/TabMenuUI";
+import TabMenu from "./ui/TabMenu";
 import { PanelContent } from "./PanelContent";
 
 import { ViewComponent } from "@/types/types";
 import PictureContent from "./PictureContent";
 
-interface TabMenuUIProps {
+interface TabMenuProps {
     tabList: Tab[];
     viewData: ViewComponent[];
     onTabChange: (value: string) => void;
@@ -19,7 +19,7 @@ interface Tab {
     sectionType: string;
 }
 
-function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
+function TabContent({ tabList, viewData, onTabChange }: TabMenuProps) {
     const [activeTab, setActiveTab] = useState<string | null>("사진");
 
     const handleTabClick = (value: string) => {
@@ -42,7 +42,7 @@ function TabContent({ tabList, viewData, onTabChange }: TabMenuUIProps) {
 
     return (
         <div>
-            <TabMenuUI
+            <TabMenu
                 tabList={tabList}
                 activeTab={activeTab}
                 onTabClick={handleTabClick}

@@ -1,10 +1,10 @@
 import React from "react";
-import DragAndDropUI from "./ui/DragAndDropUI";
+import DragAndDrop from "./ui/DragAndDrop";
 
 function PictureContent() {
     return (
         <div>
-            <DragAndDropUI />
+            <DragAndDrop />
         </div>
     );
 }

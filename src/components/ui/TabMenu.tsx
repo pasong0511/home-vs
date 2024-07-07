@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-interface TabMenuUIProps {
+interface TabMenuProps {
     tabList: Tab[];
     activeTab: string | null;
     onTabClick: (value: string) => void;
@@ -13,7 +13,7 @@ interface Tab {
     label: string;
 }
 
-function TabMenuUI({ tabList, activeTab, onTabClick }: TabMenuUIProps) {
+function TabMenu({ tabList, activeTab, onTabClick }: TabMenuProps) {
     const sortList = tabList.sort((a, b) => a.order - b.order);
 
     return (
@@ -33,4 +33,4 @@ function TabMenuUI({ tabList, activeTab, onTabClick }: TabMenuUIProps) {
     );
 }
 
-export default TabMenuUI;
+export default TabMenu;

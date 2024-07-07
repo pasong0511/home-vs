@@ -12,7 +12,7 @@ interface Button {
     label: string;
 }
 
-function ButtonGroupUI({ label, buttonList }: ButtonGroupProps) {
+function ButtonGroup({ label, buttonList }: ButtonGroupProps) {
     const sortList = buttonList.sort((a, b) => a.order - b.order);
     const [activeButton, setActiveButton] = useState<string | null>(null);
 
@@ -40,4 +40,4 @@ function ButtonGroupUI({ label, buttonList }: ButtonGroupProps) {
     );
 }
 
-export default ButtonGroupUI;
+export default ButtonGroup;

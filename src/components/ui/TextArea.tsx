@@ -3,7 +3,7 @@ interface TextAreaViewProps {
     placeholder?: string;
 }
 
-function TextAreaUI({ label, placeholder }: TextAreaViewProps) {
+function TextArea({ label, placeholder }: TextAreaViewProps) {
     return (
         <div>
             <label className="item-label">{label}</label>
@@ -12,4 +12,4 @@ function TextAreaUI({ label, placeholder }: TextAreaViewProps) {
     );
 }
 
-export default TextAreaUI;
+export default TextArea;
