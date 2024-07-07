@@ -14,19 +14,19 @@ function DragAndDrop() {
     ]);
 
     // 드래그 시작될 때 실행
-    const handleDragStart = (e, index: number) => {
+    const handleDragStart = (e: any, index: number) => {
         console.log("시작", index);
         dragItem.current = index;
     };
 
     // 드래그중인 대상이 위로 포개졌을 때
-    const handleDragEnter = (e, index: number) => {
+    const handleDragEnter = (e: any, index: number) => {
         console.log("포갬", index);
         dragOverItem.current = index;
     };
 
     // 드랍 (커서 뗐을 때)
-    const handleDragDrop = (e) => {
+    const handleDragDrop = (e: any) => {
         const dragItemIndex = dragItem.current; //드래그 시작을 선택한 아이템
         const dragOverItemIndex = dragOverItem.current; //드래그 마지막으로 포갠 아이템
         console.log("🚗드랍", dragOverItemIndex);
@@ -51,6 +51,30 @@ function DragAndDrop() {
         dragOverItem.current = null;
     };
 
+    const handleTouchStart = (e: any, index: number) => {
+        dragItem.current = index;
+    };
+
+    const handleTouchMove = (e: any) => {
+        const touchLocation = e.targetTouches[0];
+        const element = document.elementFromPoint(
+            touchLocation.clientX,
+            touchLocation.clientY
+        );
+
+        if (element && element.parentNode) {
+            const index = Array.from(element.parentNode.children).indexOf(
+                element
+            );
+            dragOverItem.current = index;
+        }
+    };
+
+    // 터치 종료될 때
+    const handleTouchEnd = (e: any) => {
+        handleDragDrop(e);
+    };
+
     return (
         <div>
             DragAndDrop
@@ -70,6 +94,9 @@ function DragAndDrop() {
                             onDragEnter={(e) => handleDragEnter(e, index)}
                             onDragEnd={handleDragDrop}
                             onDragOver={(e) => e.preventDefault()}
+                            onTouchStart={(e) => handleTouchStart(e, index)}
+                            onTouchMove={handleTouchMove}
+                            onTouchEnd={handleTouchEnd}
                         >
                             {item}
                         </div>
