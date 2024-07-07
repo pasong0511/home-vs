@@ -17,6 +17,7 @@ function DragAndDrop() {
     const handleDragStart = (e: any, index: number) => {
         console.log("시작", index);
         dragItem.current = index;
+        // e.currentTarget.style.opacity = "0.3";
     };
 
     // 드래그중인 대상이 위로 포개졌을 때
@@ -49,6 +50,8 @@ function DragAndDrop() {
 
         dragItem.current = null;
         dragOverItem.current = null;
+
+        // e.currentTarget.style.opacity = "1";
     };
 
     const handleTouchStart = (e: any, index: number) => {
@@ -107,3 +110,6 @@ function DragAndDrop() {
 }
 
 export default DragAndDrop;
+
+//https://reactjs-drag-drop.pages.dev/
+//https://www.youtube.com/watch?v=PyGqKt86gU0
