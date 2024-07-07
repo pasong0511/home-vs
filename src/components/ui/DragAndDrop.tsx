@@ -36,7 +36,19 @@ function DragAndDrop() {
             dragOverItemIndex !== null &&
             dragItemIndex !== dragOverItemIndex
         ) {
+            const newList = [...list];
+            const draggedItem = newList[dragItemIndex];
+
+            //splice 사용하여 원본 배열을 변경, 아이템을 제거하고 다시 삽입
+            newList.splice(dragItemIndex, 1); // 드래그한 아이템을 기존 위치에서 제거
+            newList.splice(dragOverItemIndex, 0, draggedItem); // 드랍한 위치에 아이템 추가
+            console.log("슬라이스1", newList);
+
+            setList(newList);
         }
+
+        dragItem.current = null;
+        dragOverItem.current = null;
     };
 
     return (
