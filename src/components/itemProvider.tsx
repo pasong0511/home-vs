@@ -1,25 +1,24 @@
 import React from "react";
 
-import ButtonGroupContainer from "./container/ButtonGroupContainer";
-import InputContainer from "./container/InputContainer";
-import TextAreaContainer from "./container/TextAreaContainer";
 import { ViewComponent } from "@/types/types";
-import CombinedInputContainer from "./container/CombinedInputContainer";
 
-export const itemProvider = (props: ViewComponent) => {
-    const { viewType } = props;
+import Input from "./ui/InputUI";
+import TextArea from "./ui/TextAreaUI";
+import ButtonGroup from "./ui/ButtonGroupUI";
+import withConfigToProps from "@/hoc/withConfigToProps";
+import CombinedContainer from "./CombinedContainer";
 
-    switch (viewType) {
-        //나중에 enum으로 만들기
-        case "input":
-            return <InputContainer {...props} />;
-        case "text_area":
-            return <TextAreaContainer {...props} />;
-        case "button_group":
-            return <ButtonGroupContainer {...props} />;
-        case "combined_input":
-            return <CombinedInputContainer {...props} />;
-        default:
-            return <div>존재하지 않는 viewType 입니다.</div>;
-    }
+const CONTAINER = {
+    input: withConfigToProps(Input),
+    text_area: withConfigToProps(TextArea),
+    button_group: withConfigToProps(ButtonGroup),
+    combined_input: CombinedContainer,
+};
+
+export const ItemProvider = ({ viewType, ...props }: ViewComponent) => {
+    const Component =
+        CONTAINER[viewType as keyof typeof CONTAINER] ??
+        (() => <div>존재하지 않는 viewType 입니다.</div>);
+
+    return <Component {...props} />;
 };

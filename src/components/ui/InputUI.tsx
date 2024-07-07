@@ -3,16 +3,31 @@ interface InputViewProps {
     label?: string;
     placeholder?: string;
     subPlaceholder?: string;
+    value?: string;
+    onChange?: (value: string) => void;
 }
 
-function InputUI({ id, label, placeholder, subPlaceholder }: InputViewProps) {
+export default function Input({
+    id,
+    label,
+    value,
+    onChange,
+    placeholder,
+    subPlaceholder,
+}: InputViewProps) {
     return (
         <div className="input-group">
             <label className="item-label" htmlFor={id}>
                 {label}
             </label>
             <div className="input-wrapper">
-                <input id={id} type="text" placeholder={placeholder} />
+                <input
+                    id={id}
+                    type="text"
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={(e) => onChange?.(e.target.value)}
+                />
                 {subPlaceholder && (
                     <span className="unit">{subPlaceholder}</span>
                 )}
@@ -20,5 +35,3 @@ function InputUI({ id, label, placeholder, subPlaceholder }: InputViewProps) {
         </div>
     );
 }
-
-export default InputUI;

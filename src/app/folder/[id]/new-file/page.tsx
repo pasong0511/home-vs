@@ -5,7 +5,9 @@ import TabContent from "@/components/TabContent";
 import { viewData } from "./temp_data";
 
 import ButtonGroupUI from "@/components/ui/ButtonGroupUI";
-import InputUI from "@/components/ui/InputUI";
+import Input from "@/components/ui/InputUI";
+import withStringState from "@/hoc/withStringState";
+import withConsole from "@/hoc/withConsole";
 
 const buttonValue = [
     { order: 1, value: "아파트", label: "아파트" },
@@ -23,6 +25,9 @@ const tabValue = [
     { order: 6, value: "환경", label: "환경", sectionType: "panel" },
     { order: 7, value: "사진", label: "사진", sectionType: "picture" },
 ];
+
+//const InputWithConsole = withConsole(withStringState(withConsole(Input)));
+const InputWith = withStringState(Input);
 
 function NewFilePage() {
     const [currentViewData, setCurrentViewData] = useState(
@@ -45,11 +50,12 @@ function NewFilePage() {
                     </div>
                 </header>
                 <main>
-                    <InputUI
+                    <InputWith
                         id={"building_type"}
                         label={"이름 (필수)"}
                         placeholder="이름을 입력해 주세요."
                     />
+
                     <ButtonGroupUI
                         label={"종류 (필수)"}
                         buttonList={buttonValue}
