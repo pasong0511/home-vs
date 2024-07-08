@@ -35,16 +35,19 @@ function DragAndDrop2() {
     const [isDragging, setIsDragging] = useState<number | undefined>();
 
     const containerRef = useRef<HTMLDivElement>(null);
-    const dragItemRef = useRef<HTMLElement | null>(null);
-    const tempDivRef = useRef<HTMLDivElement | null>(null);
-    const itemsRef = useRef<HTMLElement[]>([]); // items 참조 추가
-    const startPosRef = useRef({ x: 0, y: 0 }); // 시작 위치 참조 추가
-    const notDragItemsRef = useRef<HTMLElement[]>([]);
-    const distanceRef = useRef(0); // distance 참조 추가
-    const indexRef = useRef(0);
+    const itemsRef = useRef<HTMLElement[]>([]); // container 내부 div 목록
 
-    const dragDataRef = useRef<any>(null);
-    const newDataRef = useRef<any[]>([]);
+    const selectDragItem = useRef<HTMLElement | null>(null); //드래그 시작 선택 아이템
+    const selectDragItemIndex = useRef(0); //드래그 시작 선택 아이템 인덱스
+    const selectStartPosRef = useRef({ x: 0, y: 0 }); //드래그 시작 선택 아이템 위치
+
+    const tempDivRef = useRef<HTMLDivElement | null>(null); //드래그 선택 아이템 빠진 공간에 들어갈 div
+
+    const notDragItemsRef = useRef<HTMLElement[]>([]); //드래그 선택하지 않은 아이템들
+    const distanceRef = useRef(0);
+
+    const dragDataRef = useRef<any>(null); //드래그 전 원본 데이터
+    const newDataRef = useRef<any[]>([]); //드래그 이후 새로운 데이터
 
     //마우스 왼쪽 : true / 마우스 오른쪽 : false
     const detectLeftButton = (e: any) => {
@@ -58,19 +61,36 @@ function DragAndDrop2() {
         return button;
     };
 
+    const createTempDivEl = ({
+        width,
+        height,
+    }: {
+        width: number;
+        height: number;
+    }): HTMLDivElement => {
+        //create alternate div element whewn dragItem position is fixed
+        const div = document.createElement("div");
+        div.id = "dic-temp";
+        div.style.width = `${width}px`;
+        div.style.height = `${height}px`;
+        div.style.pointerEvents = "none";
+
+        return div;
+    };
+
     const dragEnd = () => {
         document.onpointerup = null; // Clean up the event listener
         document.onpointermove = null; // Clean up the event listener
 
         setIsDragging(undefined);
 
-        if (dragItemRef.current) {
-            dragItemRef.current.style.position = "";
-            dragItemRef.current.style.zIndex = "";
-            dragItemRef.current.style.width = "";
-            dragItemRef.current.style.height = "";
-            dragItemRef.current.style.top = "";
-            dragItemRef.current.style.left = "";
+        if (selectDragItem.current) {
+            selectDragItem.current.style.position = "";
+            selectDragItem.current.style.zIndex = "";
+            selectDragItem.current.style.width = "";
+            selectDragItem.current.style.height = "";
+            selectDragItem.current.style.top = "";
+            selectDragItem.current.style.left = "";
 
             const container = containerRef.current;
             if (container && tempDivRef.current) {
@@ -88,21 +108,21 @@ function DragAndDrop2() {
     };
 
     const dragMove = (e: any) => {
-        const { x, y } = startPosRef.current;
+        const { x, y } = selectStartPosRef.current;
         //calculate the distance the mouse pointer has traveled.
         //original coordinates minus current coordinates.
 
         const posX = e.clientX - x;
         const posY = e.clientY - y;
 
-        if (dragItemRef.current) {
-            dragItemRef.current.style.transform = `translate(${posX}px, ${posY}px)`;
+        if (selectDragItem.current) {
+            selectDragItem.current.style.transform = `translate(${posX}px, ${posY}px)`;
 
             //swap position and data
             notDragItemsRef.current.forEach((item) => {
                 //check two element is overlapping.
 
-                const rect1 = dragItemRef.current?.getBoundingClientRect();
+                const rect1 = selectDragItem.current?.getBoundingClientRect();
                 const rect2 = item.getBoundingClientRect();
 
                 if (rect1 && rect2) {
@@ -110,35 +130,27 @@ function DragAndDrop2() {
                         rect1.y < rect2.y + rect2.height / 2 &&
                         rect1.y + rect1.height / 2 > rect2.y;
 
-                    //console.log(isOverlapping);
-
                     if (isOverlapping) {
                         //swap position card
                         if (item.getAttribute("style")) {
                             item.style.transform = "";
-                            indexRef.current++;
+                            selectDragItemIndex.current++;
                         } else {
                             const distance = distanceRef.current;
                             item.style.transform = `translateY(${distance}px)`;
-                            indexRef.current--;
+                            selectDragItemIndex.current--;
                         }
 
                         //swrap data
                         const dragData = dragDataRef.current;
-                        // const newData = newDataRef.current.filter(
-                        //     (item) => item.id !== dragData.id
-                        // );
-                        // newDataRef.current = newData;
-
                         newDataRef.current = data.filter(
                             (item) => item.id !== dragData.id
                         );
                         newDataRef.current.splice(
-                            indexRef.current,
+                            selectDragItemIndex.current,
                             0,
                             dragDataRef.current
                         );
-                        console.log(newDataRef.current);
                     }
                 }
             });
@@ -149,40 +161,44 @@ function DragAndDrop2() {
     const handleDragStart = (e: any, index: number) => {
         //오직 마우스 왼쪽 클릭만 허용
         if (!detectLeftButton(e)) return;
-        console.log({ "left mouse click ": detectLeftButton(e) });
 
+        //드래그 대상 아이템의 인덱스 저장
         setIsDragging(index);
-        indexRef.current = index;
+        selectDragItemIndex.current = index;
 
         const container = containerRef.current;
         if (container) {
+            //items 목록 저장
             const items = Array.from(container.childNodes) as HTMLElement[];
-            itemsRef.current = items; // items를 참조에 저장
+            itemsRef.current = items;
 
-            const dragItem = items[index] as HTMLElement; //선택한 아이템 엘리먼트
-            dragItemRef.current = dragItem; // dragItem을 참조에 저장
+            //선택한 드래그 아이템 저장
+            const dragItem = items[index] as HTMLElement;
+            selectDragItem.current = dragItem;
 
+            //드래그 선택한 아이템의 이후 아이템들 -> 밀때 사용
             const itemsBelowDragItem = items.slice(
                 index + 1
             ) as HTMLDivElement[];
-            //console.log(itemsBelowDragItem);
-            const notDragItems = items.filter((_, i) => i !== index); //드래그 선택한 아이템이 아닌 목록
+
+            //드래그 선택하지 않은 아이템들
+            const notDragItems = items.filter((_, i) => i !== index);
             notDragItemsRef.current = notDragItems;
 
+            //드래그한 데이터 저장
             const dragData = data[index];
             dragDataRef.current = dragData;
-
-            //const newData = data.filter((item) => item.id !== dragData.id);
             newDataRef.current = [...data];
 
             //선택한 아이템 Rect 정보 가져오기
             const dragBoundingRect = dragItem.getBoundingClientRect();
-            //distance between two chard
-            const space =
+
+            //카드와 카드 사이의 간격정보 가져오기
+            const cardSpace =
                 items[1].getBoundingClientRect().top -
                 items[0].getBoundingClientRect().bottom;
-            //console.log(space);
-            distanceRef.current = dragBoundingRect.height + space;
+
+            distanceRef.current = dragBoundingRect.height + cardSpace;
 
             //드래그 아이템 마우스 다운할 때 스타일 set
             dragItem.style.position = "fixed";
@@ -193,27 +209,22 @@ function DragAndDrop2() {
             dragItem.style.left = `${dragBoundingRect.left}px`;
             dragItem.style.left = "grabbing";
 
-            //create alternate div element whewn dragItem position is fixed
-            const div = document.createElement("div");
-            div.id = "dic-temp";
-            div.style.width = `${dragBoundingRect.width}px`;
-            div.style.height = `${dragBoundingRect.height}px`;
-            div.style.pointerEvents = "none";
-            container.appendChild(div);
+            //드래그 할 때 빈 공간에 생기는 임시 div 생성
+            const tempEl = createTempDivEl({
+                width: dragBoundingRect.width,
+                height: dragBoundingRect.height,
+            });
+            container.appendChild(tempEl);
+            tempDivRef.current = tempEl;
 
-            // Store the created div in the ref
-            tempDivRef.current = div;
-
-            // move the elements below dragItem
-            // distence to be moved
-            const distance = dragBoundingRect.height + space;
-
+            //드래그 선택한 아이템의 이후 아이템들 Y 축으로 밀기
+            const distance = dragBoundingRect.height + cardSpace;
             itemsBelowDragItem.forEach((item) => {
                 item.style.transform = `translateY(${distance}px)`;
             });
 
-            //get the original coordinates of the mouse pointer
-            startPosRef.current = { x: e.clientX, y: e.clientY };
+            //드래그 시작한 아이템 좌표 저장
+            selectStartPosRef.current = { x: e.clientX, y: e.clientY };
 
             // 드래그 이벤트
             document.onpointermove = dragMove;
@@ -251,3 +262,73 @@ export default DragAndDrop2;
 
 //https://reactjs-drag-drop.pages.dev/
 //https://www.youtube.com/watch?v=PyGqKt86gU0
+
+// 세부 구현 사항
+// 1. 드래그 시작 기능
+// 드래그 이벤트 설정
+
+// 각 아이템에 onPointerDown 이벤트를 설정하여 드래그를 시작할 수 있도록 한다.
+// 마우스 왼쪽 버튼 확인
+
+// 드래그가 시작될 때, 마우스 왼쪽 버튼이 클릭된 경우에만 드래그가 시작되도록 한다.
+// 이를 통해 의도하지 않은 드래그를 방지한다.
+// 초기 위치 저장
+
+// 드래그가 시작될 때, 드래그된 아이템의 초기 마우스 위치를 저장한다.
+// 이를 통해 드래그 중 이동 거리를 계산할 수 있다.
+// 아이템 스타일 변경
+
+// 드래그가 시작되면, 드래그된 아이템의 스타일을 변경하여 고정 위치로 설정한다.
+// 시각적으로 드래그 중임을 사용자에게 알릴 수 있도록 한다.
+// 임시 대체 div 생성
+
+// 드래그된 아이템의 원래 위치를 유지하기 위해 임시 div를 생성하여 컨테이너에 추가한다.
+// 임시 div는 드래그된 아이템의 자리 표시자 역할을 한다.
+// 2. 드래그 이동 기능
+// 드래그 이벤트 설정
+
+// 드래그 중에 onPointerMove 이벤트를 설정하여 드래그된 아이템의 위치를 업데이트한다.
+// 아이템 위치 업데이트
+
+// 드래그 중인 아이템의 위치를 실시간으로 업데이트하여 사용자 인터페이스에 반영한다.
+// 마우스의 현재 위치를 기반으로 드래그된 아이템의 새로운 위치를 계산한다.
+// 아이템 겹침 감지
+
+// 드래그 중인 아이템과 다른 아이템의 겹침을 감지하여 위치를 교환한다.
+// 드래그된 아이템이 다른 아이템과 겹칠 때, 두 아이템의 위치를 교환하여 시각적 순서를 업데이트한다.
+// 데이터 순서 업데이트
+
+// 겹침이 발생할 때마다 데이터의 순서를 업데이트하여 상태에 반영한다.
+// 이를 통해 드래그가 완료되었을 때 올바른 순서로 데이터를 유지할 수 있다.
+// 3. 드래그 종료 기능
+// 드래그 종료 이벤트 설정
+
+// 드래그가 종료될 때 onPointerUp 이벤트를 설정하여 드래그를 종료한다.
+// 아이템 스타일 복원
+
+// 드래그가 종료되면 드래그된 아이템을 원래 스타일로 복원한다.
+// 이를 통해 드래그 상태가 끝났음을 사용자에게 알린다.
+// 임시 div 제거
+
+// 임시로 생성된 div를 제거하여 원래의 레이아웃을 복원한다.
+// 임시 div가 제거됨으로써 드래그된 아이템이 원래 위치에 놓이게 된다.
+// 데이터 상태 업데이트
+
+// 최종적으로 드래그된 아이템의 새로운 위치를 반영하여 데이터 상태를 업데이트한다.
+// 이를 통해 드래그 앤 드랍이 완료된 후에도 올바른 데이터 순서를 유지할 수 있다.
+
+// 1. 드래그 시작 기능
+// onPointerDown 이벤트를 사용하여 드래그를 시작합니다.
+// 마우스 왼쪽 버튼이 클릭된 경우에만 드래그를 시작합니다.
+// 드래그된 아이템의 초기 위치를 저장합니다.
+// 드래그된 아이템의 스타일을 변경하여 고정 위치로 설정합니다.
+
+// 2. 드래그 이동 기능
+// onPointerMove 이벤트를 사용하여 드래그 중인 아이템의 위치를 업데이트합니다.
+// 드래그된 아이템과 다른 아이템의 겹침을 감지하여 위치를 교환합니다.
+// 데이터의 순서를 업데이트하여 상태에 반영합니다.
+
+// 3. 드래그 종료 기능
+// onPointerUp 이벤트를 사용하여 드래그를 종료합니다.
+// 드래그된 아이템을 원래 위치로 복원하고, 임시로 생성된 div를 제거합니다.
+// 최종적으로 업데이트된 데이터를 상태에 반영합니다.
