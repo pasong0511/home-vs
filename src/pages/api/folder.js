@@ -1,5 +1,3 @@
-// src/pages/api/folder.js
-
 import { v4 as uuidv4 } from "uuid";
 
 export default async function handler(req, res) {
@@ -20,7 +18,7 @@ export default async function handler(req, res) {
 
             res.status(200).json(data);
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching folders:", error);
             res.status(500).json({
                 message: error.message || "Internal Server Error",
             });
@@ -28,6 +26,8 @@ export default async function handler(req, res) {
     } else if (req.method === "POST") {
         try {
             const { folderName, location, memo, option } = req.body;
+            console.log("Request body:", req.body); // 요청 본문 로그
+
             const newFolder = {
                 id: uuidv4(),
                 folderName,
@@ -36,6 +36,8 @@ export default async function handler(req, res) {
                 option,
                 create: new Date().toISOString(),
             };
+
+            console.log("New folder data:", newFolder); // 생성된 폴더 데이터 로그
 
             const response = await fetch("http://localhost:4000/folders", {
                 method: "POST",
@@ -46,7 +48,11 @@ export default async function handler(req, res) {
             });
 
             if (!response.ok) {
-                throw new Error("Failed to add folder to JSON Server");
+                const errorMessage = await response.text();
+                console.error("Error from JSON Server:", errorMessage); // JSON 서버 오류 메시지 로그
+                throw new Error(
+                    `Failed to add folder to JSON Server: ${errorMessage}`
+                );
             }
 
             const text = await response.text();
@@ -59,7 +65,7 @@ export default async function handler(req, res) {
 
             res.status(201).json(folder);
         } catch (error) {
-            console.error(error);
+            console.error("Error adding folder:", error); // 폴더 추가 오류 로그
             res.status(500).json({
                 message: error.message || "Internal Server Error",
             });

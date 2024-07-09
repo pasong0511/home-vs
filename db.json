@@ -1,76 +1,28 @@
 {
-    "FoldersList": [
-        {
-            "folderName": "111",
-            "location": "111",
-            "memo": "111",
-            "option": {},
-            "create": "2024-06-23T17:00:24.552Z",
-            "id": "8da01656-5c2b-4e9f-bd14-aae4e975ce48"
-        },
-        {
-            "id": "5b3f5754-471f-488d-b0e0-b2a7d3035433",
-            "folderName": "22",
-            "location": "22",
-            "memo": "22",
-            "option": {},
-            "create": "2024-06-23T17:00:17.871Z"
-        },
-        {
-            "id": "d9e27d7e-1452-4e9c-9631-505ae67dadcd",
-            "folderName": "33",
-            "location": "33",
-            "memo": "3333",
-            "option": {},
-            "create": "2024-06-24T16:40:34.076Z"
-        },
-        {
-            "id": "99857523-780c-4867-858f-62a5612a3ff9",
-            "folderName": "77",
-            "location": "77",
-            "memo": "77",
-            "option": {},
-            "create": "2024-06-24T16:41:06.749Z"
-        },
-        {
-            "id": "b25d2038-a35b-46a0-91c6-ed8350a8debe",
-            "folderName": "ㅕ",
-            "location": "ㅕ",
-            "memo": "ㅕ",
-            "option": {},
-            "create": "2024-06-24T16:43:57.749Z"
-        },
-        {
-            "id": "44518f49-11cd-4771-b8c4-8aae2a5f156e",
-            "folderName": "ㅑㅑ",
-            "location": "ㅑㅑ",
-            "memo": "ㅑㅑ",
-            "option": {},
-            "create": "2024-06-24T16:44:02.054Z"
-        },
-        {
-            "id": "0cd9dd15-ddb1-47e5-9617-7b2380418293",
-            "folderName": "수퍼노바",
-            "location": "수퍼노바",
-            "memo": "수퍼노바",
-            "option": {},
-            "create": "2024-06-24T16:46:45.306Z"
-        },
-        {
-            "id": "16668dd6-a503-4e09-a1c8-68f445bf0392",
-            "folderName": "999",
-            "location": "99",
-            "memo": "99",
-            "option": {},
-            "create": "2024-06-24T16:50:53.261Z"
-        },
-        {
-            "id": "0edd6c85-5a19-448a-ae6f-23a6e0c6cd0f",
-            "folderName": "ㅠㅠ",
-            "location": "ㅠㅠ",
-            "memo": "ㅠㅠ",
-            "option": {},
-            "create": "2024-06-24T16:55:35.087Z"
-        }
-    ]
+  "folders": [
+    {
+      "id": "2384f247-a7d8-4c55-8036-db3b73a331a1",
+      "folderName": "33",
+      "location": "33",
+      "memo": "33",
+      "option": {},
+      "create": "2024-07-09T13:22:55.433Z"
+    },
+    {
+      "id": "906d0484-d92c-48b2-b2a1-4964d013cd01",
+      "folderName": "44",
+      "location": "44",
+      "memo": "44",
+      "option": {},
+      "create": "2024-07-09T13:27:40.829Z"
+    },
+    {
+      "id": "876ed7e2-6c96-48e4-acbb-dec97ef66177",
+      "folderName": "55",
+      "location": "55",
+      "memo": "55",
+      "option": {},
+      "create": "2024-07-09T13:28:04.736Z"
+    }
+  ]
 }
