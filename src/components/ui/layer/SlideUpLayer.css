@@ -1,32 +1,10 @@
-/* SlideUpLayer.css */
-@keyframes slideUp {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(40%);
-        opacity: 1;
-    }
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(40%);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-}
-
+/* SlideUpLayer 스타일 */
 .slide-up-layer {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60%;
+    height: 100%;
     background-color: white;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -34,16 +12,14 @@
     border-top-right-radius: 25px;
     overflow: hidden;
     padding: 30px;
-    opacity: 0;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    transform: translateY(100%);
 }
 
 .slide-up-layer.show {
-    transform: translateY(40%);
-    opacity: 1;
+    transform: translateY(0%);
 }
 
 .slide-up-layer.hide {
     transform: translateY(100%);
-    opacity: 0;
 }

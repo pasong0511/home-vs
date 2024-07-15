@@ -7,8 +7,8 @@ import React, {
     useImperativeHandle,
     useState,
 } from "react";
-import "./SlideUpLayer.css";
 import ReactDOM from "react-dom";
+import "./SlideUpLayer.css";
 
 interface SlideUpLayerProps {
     children: ReactNode;
@@ -25,18 +25,19 @@ const SlideUpLayer: ForwardRefRenderFunction<
 > = ({ children }, ref) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [isMounted, setIsMounted] = useState<boolean>(false);
-    const [shouldRender, setShouldRender] = useState<boolean>(false);
 
     useImperativeHandle(ref, () => ({
         show() {
-            setShouldRender(true);
-            setTimeout(() => setIsVisible(true), 10);
+            setIsVisible(true);
         },
         hide() {
             setIsVisible(false);
-            setTimeout(() => setShouldRender(false), 300);
         },
     }));
+
+    const hideLayer = () => {
+        setIsVisible(false);
+    };
 
     useEffect(() => {
         setIsMounted(true);
@@ -47,10 +48,9 @@ const SlideUpLayer: ForwardRefRenderFunction<
         return null;
     }
 
-    const layerContent = shouldRender && (
+    const layerContent = (
         <div className={`slide-up-layer ${isVisible ? "show" : "hide"}`}>
-            <button onClick={() => setIsVisible(false)}>Close</button>
-            <div className="move-button">Move</div>
+            <button onClick={hideLayer}>Close</button>
             {children}
         </div>
     );
